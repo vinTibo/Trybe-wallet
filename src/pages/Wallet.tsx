@@ -1,14 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-type RootState = {
-  email: string;
-};
+import Header from '../components/Header';
 
 function Wallet() {
-  const rootState = useSelector((state: RootState) => state);
-  console.log(rootState);
   return (
     <div>
+      <Header />
       TrybeWallet
     </div>
   );
