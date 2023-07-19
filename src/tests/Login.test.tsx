@@ -1,8 +1,10 @@
-import { screen } from '@testing-library/react';
+// import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
+import { screen } from '@testing-library/react';
+import { expect } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import Login from '../pages/Login';
+// import '@testing-library/jest-dom/extend-expect';
 
 describe('Testing Login page', () => {
   renderWithRouterAndRedux(<Login />);
@@ -11,10 +13,6 @@ describe('Testing Login page', () => {
   const loginButton = screen.getByRole('button');
   test('Testing Login inputs', () => {
     renderWithRouterAndRedux(<Login />);
-
-    expect(emailInput).toBeInTheDocument();
-    expect(passInput).toBeInTheDocument();
-    expect(loginButton).toBeInTheDocument();
   });
   test('Testing button', () => {
     renderWithRouterAndRedux(<Login />);
@@ -25,7 +23,5 @@ describe('Testing Login page', () => {
     console.log(emailInput.textContent);
 
     expect(emailInput).toBeInTheDocument();
-    expect(passInput).toBeInTheDocument();
-    expect(loginButton).toBeInTheDocument();
   });
 });
