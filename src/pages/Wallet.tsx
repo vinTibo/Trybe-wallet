@@ -6,7 +6,6 @@ function Wallet() {
   return (
     <div>
       <Header />
-      TrybeWallet
       <WalletForm />
       <Table />
     </div>

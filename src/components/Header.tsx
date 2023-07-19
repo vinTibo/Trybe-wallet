@@ -21,11 +21,11 @@ function Header() {
   }, [expenses]);
 
   return (
-    <div>
-      <p data-testid="email-field">{ email }</p>
+    <header>
+      <h3 data-testid="email-field">{ email }</h3>
       <p data-testid="total-field">{ result.toFixed(2) }</p>
       <p data-testid="header-currency-field">BRL</p>
-    </div>
+    </header>
   );
 }
 
