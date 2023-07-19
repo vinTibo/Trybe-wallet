@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import { expect } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import Login from '../pages/Login';
+import App from '../App';
 
 describe('Testing Login page', () => {
   const EMAIL_INPUT = 'email-input';
@@ -36,7 +37,7 @@ describe('Testing Login page', () => {
     expect(loginButton).toBeEnabled();
   });
   test('Testing after button click', async () => {
-    renderWithRouterAndRedux(<Login />);
+    renderWithRouterAndRedux(<App />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT);
     const passInput = screen.getByTestId(PASSWORD_INPUT);
