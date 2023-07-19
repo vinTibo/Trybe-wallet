@@ -39,72 +39,7 @@ export type ExpensesType = {
 export type Dispatch = ThunkDispatch<StoreType, null, AnyAction>;
 
 export type ExchangeRateType = {
-  USD: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  CAD: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  EUR: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  GBP: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  ARS: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  BTC: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  LTC: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  JPY: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  CHF: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  AUD: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  CNY: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  ILS: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  ETH: {
-    code: string;
-    name: string;
-    ask: string;
-  };
-  XRP: {
+  [key: string]: {
     code: string;
     name: string;
     ask: string;
