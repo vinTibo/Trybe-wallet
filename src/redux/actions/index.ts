@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ExpensesType } from '../../type';
+import { ExpensesType, WalletFormType } from '../../type';
 
 export const SAVE_USER = 'SAVE_USER';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
@@ -16,7 +16,7 @@ export const requestCurrencies = (payload: string[]) => ({
   payload,
 });
 
-export const createExpense = (payload: ExpensesType) => ({
+export const createExpense = (payload: WalletFormType) => ({
   type: CREATE_EXPENSE,
   payload,
 });

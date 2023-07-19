@@ -1,59 +1,54 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { createExpense, fetchCurrencies, requestCurrencies } from '../redux/actions';
-import { Dispatch, ExchangeRateType, ExpensesType, StoreType } from '../type';
+import { createExpense, fetchCurrencies } from '../redux/actions';
+import { Dispatch, StoreType, WalletFormType } from '../type';
 import { fetchCurrenciesExchangeRates } from '../fetch';
 
 function WalletForm() {
   const { currencies, expenses } = useSelector((state: StoreType) => state.wallet);
-  const [exRateInfo, setExRateInfo] = useState();
+  const [id, setId] = useState(0);
+
+  const EMPTY_FORM = {
+    value: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
+    description: '',
+    exchangeRates: '',
+  };
 
   const dispatch: Dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrencies());
-    const handleFetchExchangeRates = async () => {
-      const data = await fetchCurrenciesExchangeRates();
-      console.log(data);
-      setExRateInfo(data);
-      console.log(exRateInfo);
-    };
-    handleFetchExchangeRates();
-  }, []);
+  }, [dispatch]);
 
-  const [expensesInfo, setExpensesInfo] = useState({
-    id: expenses.length,
-    value: '',
-    currency: 'USD',
-    method: 'money',
-    tag: 'food',
-    description: '',
-    exchangeRate: exRateInfo,
-  });
+  const [expensesInfo, setExpensesInfo] = useState<WalletFormType>(EMPTY_FORM);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     setExpensesInfo({
       ...expensesInfo,
       [event.target.name]: event.target.value,
     });
   };
 
-  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setExpensesInfo({
-      ...expensesInfo,
-      [event.target.name]: event.target.value,
-    });
-  }
-  console.log(expenses);
-
-  const onsubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onsubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(createExpense(expensesInfo));
+    const data = {
+      id,
+      ...expensesInfo,
+      exchangeRates: await fetchCurrenciesExchangeRates(),
+    };
+    dispatch(createExpense(data));
+    setId(id + 1);
+    setExpensesInfo(EMPTY_FORM);
   };
 
   return (
     <form onSubmit={ onsubmit }>
-      <label htmlFor="valeuInput">
+      <label htmlFor="value">
         Valor:
         <input
           type="text"
@@ -81,7 +76,7 @@ function WalletForm() {
           name="currency"
           id="currency"
           data-testid="currency-input"
-          onChange={ handleChangeSelect }
+          onChange={ handleChange }
         >
           { currencies.map((currency, index) => (
             <option
@@ -99,11 +94,11 @@ function WalletForm() {
           name="method"
           id="method"
           data-testid="method-input"
-          onChange={ handleChangeSelect }
+          onChange={ handleChange }
         >
-          <option value="money">Dinheiro</option>
-          <option value="credit">Cartão de crédito</option>
-          <option value="debit">Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
       <label htmlFor="tag">
@@ -112,13 +107,13 @@ function WalletForm() {
           name="tag"
           id="tag"
           data-testid="tag-input"
-          onChange={ handleChangeSelect }
+          onChange={ handleChange }
         >
-          <option value="food">Alimentação</option>
-          <option value="relax">Lazer</option>
-          <option value="work">Trabalho</option>
-          <option value="transportation">Transporte</option>
-          <option value="health">Saúde</option>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
         </select>
       </label>
       <button type="submit">Adicionar despesa</button>
