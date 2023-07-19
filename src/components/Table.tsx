@@ -1,8 +1,16 @@
-import { useSelector } from 'react-redux';
-import { StoreType, ExpensesType } from '../type';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch, StoreType, ExpensesType } from '../type';
+import { refreshExpensesList } from '../redux/actions';
 
 function Table() {
+  const dispatch: Dispatch = useDispatch();
   const { expenses } = useSelector((state: StoreType) => state.wallet);
+  const handleClick = (id: number) => {
+    console.log(id);
+    const filterExpeses = expenses.filter((expense) => expense.id !== id);
+    console.log(filterExpeses);
+    dispatch(refreshExpensesList(filterExpeses));
+  };
   return (
     <table>
       <thead>
@@ -34,7 +42,14 @@ function Table() {
               }
             </td>
             <td>Real</td>
-            <td>X</td>
+            <td>
+              <button
+                data-testid="delete-btn"
+                onClick={ () => handleClick(expense.id) }
+              >
+                Deletar
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>

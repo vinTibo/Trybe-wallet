@@ -1,4 +1,4 @@
-import { CREATE_EXPENSE, REQUEST_CURRENCIES } from '../actions';
+import { CREATE_EXPENSE, REFRESH_EXPENSES_LIST, REQUEST_CURRENCIES } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
@@ -24,6 +24,11 @@ function wallet(state = INITIAL_STATE, action: ActionType) {
       return {
         ...state,
         expenses: [...state.expenses, action.payload],
+      };
+    case REFRESH_EXPENSES_LIST:
+      return {
+        ...state,
+        expenses: action.payload,
       };
     default:
       return state;

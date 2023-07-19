@@ -5,6 +5,7 @@ export const SAVE_USER = 'SAVE_USER';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const API_URL = 'https://economia.awesomeapi.com.br/json/all';
 export const CREATE_EXPENSE = 'CREATE_EXPENSE';
+export const REFRESH_EXPENSES_LIST = 'REFRESH_EXPENSES_LIST';
 
 export const actionCreator = (payload: string) => ({
   type: SAVE_USER,
@@ -18,6 +19,11 @@ export const requestCurrencies = (payload: string[]) => ({
 
 export const createExpense = (payload: WalletFormType) => ({
   type: CREATE_EXPENSE,
+  payload,
+});
+
+export const refreshExpensesList = (payload: ExpensesType[]) => ({
+  type: REFRESH_EXPENSES_LIST,
   payload,
 });
 
