@@ -6,7 +6,7 @@ function Header() {
   const [result, setResult] = useState(0);
   const { email } = useSelector((state: StoreType) => state.user);
   const { expenses } = useSelector((state: StoreType) => state.wallet);
-  console.log(expenses);
+
   const handleTotal = () => {
     expenses.forEach((expense) => {
       const value = Number(expense.value) * Number(

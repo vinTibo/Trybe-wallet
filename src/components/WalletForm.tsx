@@ -5,7 +5,7 @@ import { Dispatch, StoreType, WalletFormType } from '../type';
 import { fetchCurrenciesExchangeRates } from '../fetch';
 
 function WalletForm() {
-  const { currencies, expenses } = useSelector((state: StoreType) => state.wallet);
+  const { currencies } = useSelector((state: StoreType) => state.wallet);
   const [id, setId] = useState(0);
 
   const EMPTY_FORM = {
