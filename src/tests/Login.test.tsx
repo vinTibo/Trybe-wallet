@@ -1,10 +1,15 @@
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import Login from '../pages/Login';
 import App from '../App';
+import mockData from './helpers/mockData';
 
 describe('Testing Login page', () => {
+  global.fetch = vi.fn().mockResolvedValue({
+    json: async () => (mockData),
+  });
   const EMAIL_INPUT = 'email-input';
   const PASSWORD_INPUT = 'password-input';
   test('Testing Login inputs', () => {
