@@ -1,6 +1,5 @@
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
-import { expect } from 'vitest';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import Login from '../pages/Login';
 import App from '../App';
